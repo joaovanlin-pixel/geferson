@@ -1,221 +1,66 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vanlin Gestor - Hall de Entrada</title>
-    
-    <!-- Tailwind CSS (Estilização Moderna) -->
+<html lang="pt-BR" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Gestor Geferson</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Font Awesome (Ícones) -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <!-- Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
-
-    <!-- Configurações Personalizadas do Tailwind -->
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        serif: ['Playfair Display', 'serif'],
-                    },
-                    colors: {
-                        glass: 'rgba(255, 255, 255, 0.08)',
-                        glassHover: 'rgba(255, 255, 255, 0.15)',
-                        borderGlass: 'rgba(255, 255, 255, 0.1)',
-                    },
-                    animation: {
-                        'fade-in-up': 'fadeInUp 0.8s ease-out forwards',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                    },
-                    keyframes: {
-                        fadeInUp: {
-                            '0%': { opacity: '0', transform: 'translateY(20px)' },
-                            '100%': { opacity: '1', transform: 'translateY(0)' },
-                        }
-                    }
-                }
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            colors: {
+              slate: {
+                850: '#1e293b',
+                900: '#0f172a',
+                950: '#020617',
+              }
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
             }
+          }
         }
+      }
     </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        /* Fundo Animado e Estilos Globais */
-        body {
-            background-color: #0f172a;
-            background-image: 
-                radial-gradient(at 0% 0%, hsla(253,16%,7%,1) 0, transparent 50%), 
-                radial-gradient(at 50% 0%, hsla(225,39%,30%,1) 0, transparent 50%), 
-                radial-gradient(at 100% 0%, hsla(339,49%,30%,1) 0, transparent 50%);
-            background-attachment: fixed;
-            background-size: cover;
-            color: #ffffff;
-            overflow-x: hidden;
-        }
-
-        /* Efeito de Vidro (Glassmorphism) */
-        .glass-card {
-            background: var(--glass);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid var(--borderGlass);
-            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
-        }
-
-        .sector-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .sector-card:hover {
-            transform: translateY(-5px);
-            background: var(--glassHover);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 0 20px 40px -5px rgba(0, 0, 0, 0.4);
-        }
-
-        /* Animação suave nos ícones ao passar o mouse */
-        .sector-card:hover i {
-            transform: scale(1.1);
-            color: #fbbf24; /* Amber-400 */
-        }
+      body {
+        background-color: #020617;
+        color: #e2e8f0;
+      }
+      /* Custom Scrollbar */
+      ::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #0f172a; 
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #334155; 
+        border-radius: 3px;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #475569; 
+      }
     </style>
+  <script type="importmap">
+{
+  "imports": {
+    "firebase/": "https://esm.sh/firebase@^12.7.0/",
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "chart.js/": "https://esm.sh/chart.js@^4.5.1/",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3"
+  }
+}
+</script>
 </head>
-<body class="min-h-screen flex items-center justify-center p-4 selection:bg-amber-500 selection:text-white">
-
-    <!-- Container Principal -->
-    <main class="w-full max-w-5xl mx-auto animate-fade-in-up">
-        
-        <!-- Cabeçalho -->
-        <header class="text-center mb-12">
-            <div class="inline-block mb-4 p-3 rounded-full glass-card">
-                <i class="fa-solid fa-layer-group text-3xl text-amber-400"></i>
-            </div>
-            <h1 class="text-4xl md:text-6xl font-serif font-bold tracking-tight mb-2 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400">
-                Vanlin Gestor
-            </h1>
-            <p class="text-gray-400 text-lg font-light tracking-wide uppercase text-sm">Central de Organização & Controle</p>
-            <div id="date-display" class="mt-4 text-sm text-gray-500 font-mono"></div>
-        </header>
-
-        <!-- Grid de Setores -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 px-2 md:px-12">
-
-            <!-- Card 1: Geferson -->
-            <a href="/geferson" class="group relative block">
-                <div class="glass-card sector-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
-                    <div class="w-16 h-16 rounded-full bg-blue-900/30 flex items-center justify-center mb-4 border border-blue-500/20 group-hover:border-blue-400/50 transition-colors">
-                        <i class="fa-solid fa-user-tie text-2xl text-blue-400 transition-transform duration-300"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 group-hover:text-blue-300 transition-colors">Geferson</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Gestão financeira e pagamentos ao fornecedor Geferson.
-                    </p>
-                    <div class="mt-6 flex items-center text-blue-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                        Acessar Painel <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 2: Obra -->
-            <a href="/obra" class="group relative block">
-                <div class="glass-card sector-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
-                    <div class="w-16 h-16 rounded-full bg-orange-900/30 flex items-center justify-center mb-4 border border-orange-500/20 group-hover:border-orange-400/50 transition-colors">
-                        <i class="fa-solid fa-helmet-safety text-2xl text-orange-400 transition-transform duration-300"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 group-hover:text-orange-300 transition-colors">Obra</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Controle de gastos, materiais e cronograma de obras.
-                    </p>
-                    <div class="mt-6 flex items-center text-orange-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                        Acessar Painel <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 3: Madeira -->
-            <a href="/madeira" class="group relative block">
-                <div class="glass-card sector-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
-                    <div class="w-16 h-16 rounded-full bg-emerald-900/30 flex items-center justify-center mb-4 border border-emerald-500/20 group-hover:border-emerald-400/50 transition-colors">
-                        <i class="fa-solid fa-tree text-2xl text-emerald-400 transition-transform duration-300"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 group-hover:text-emerald-300 transition-colors">Madeira</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Romaneios, registro de vendas e estoque de madeira.
-                    </p>
-                    <div class="mt-6 flex items-center text-emerald-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                        Acessar Painel <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 4: Douglas -->
-            <a href="/douglas" class="group relative block">
-                <div class="glass-card sector-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
-                    <div class="w-16 h-16 rounded-full bg-purple-900/30 flex items-center justify-center mb-4 border border-purple-500/20 group-hover:border-purple-400/50 transition-colors">
-                        <i class="fa-solid fa-handshake text-2xl text-purple-400 transition-transform duration-300"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 group-hover:text-purple-300 transition-colors">Douglas</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Contas e pagamentos ao fornecedor Douglas.
-                    </p>
-                    <div class="mt-6 flex items-center text-purple-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                        Acessar Painel <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </a>
-
-            <!-- Card 5: Finanças -->
-            <a href="/financas" class="group relative block md:col-span-2">
-                <div class="glass-card sector-card rounded-2xl p-8 h-full flex flex-col items-center text-center">
-                    <div class="w-16 h-16 rounded-full bg-cyan-900/30 flex items-center justify-center mb-4 border border-cyan-500/20 group-hover:border-cyan-400/50 transition-colors">
-                        <i class="fa-solid fa-coins text-2xl text-cyan-400 transition-transform duration-300"></i>
-                    </div>
-                    <h2 class="text-2xl font-bold mb-2 group-hover:text-cyan-300 transition-colors">Finanças</h2>
-                    <p class="text-gray-400 text-sm leading-relaxed">
-                        Central de organização financeira, balanços e fluxo de caixa.
-                    </p>
-                    <div class="mt-6 flex items-center text-cyan-400 text-sm font-semibold opacity-0 group-hover:opacity-100 transition-opacity transform translate-y-2 group-hover:translate-y-0 duration-300">
-                        Acessar Painel <i class="fa-solid fa-arrow-right ml-2"></i>
-                    </div>
-                </div>
-            </a>
-
-        </div>
-
-        <!-- Rodapé -->
-        <footer class="mt-16 text-center text-gray-500 text-xs border-t border-white/5 pt-8 mx-12">
-            <p>&copy; 2024 Vanlin Gestor. Todos os direitos reservados.</p>
-            <div class="mt-2 flex justify-center space-x-4">
-                <span class="flex items-center"><div class="w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></div> Sistema Online</span>
-            </div>
-        </footer>
-
-    </main>
-
-    <!-- Script para Data e Hora -->
-    <script>
-        function updateDateTime() {
-            const now = new Date();
-            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
-            const timeOptions = { hour: '2-digit', minute: '2-digit' };
-            
-            const dateStr = now.toLocaleDateString('pt-BR', options);
-            const timeStr = now.toLocaleTimeString('pt-BR', timeOptions);
-            
-            // Capitalizar a primeira letra
-            const formattedDate = dateStr.charAt(0).toUpperCase() + dateStr.slice(1);
-
-            document.getElementById('date-display').innerHTML = `${formattedDate} • ${timeStr}`;
-        }
-
-        updateDateTime();
-        setInterval(updateDateTime, 60000); // Atualiza a cada minuto
-    </script>
-</body>
+  <body>
+    <div id="root"></div>
+  </body>
 </html>
